@@ -10,56 +10,57 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import selenium_framework.pageobjects.CartPage;
+import selenium_framework.pageobjects.CheckOutPage;
+import selenium_framework.pageobjects.ConfirmationPage;
 import selenium_framework.pageobjects.LoginPage;
 import selenium_framework.pageobjects.productPage;
+import selenium_framework.testcomponents.BaseTest;
 
-public class SubmitOrderTest {
+public class SubmitOrderTest extends BaseTest {
 
-	static WebDriver driver;
-
-	public static void main(String[] args) {
-
-		String mode = "headed";
-		driver = new ChromeDriver(browerOptions(mode));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
-		if (mode.equalsIgnoreCase("headed")) {
-			driver.manage().window().maximize();
-		}
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		Actions a = new Actions(driver);
-
+	@Test
+	public void submitOrder() throws InterruptedException {
 		LoginPage la = new LoginPage(driver);
+		productPage pp = new productPage(driver);
+		CartPage cp = new CartPage(driver);
+		CheckOutPage co = new CheckOutPage(driver);
+		ConfirmationPage cf = new ConfirmationPage(driver);
 
 		la.lauchApplication("https://rahulshettyacademy.com/client/");
 
 		la.loginApplication("test557@gmail.com", "Test_557");
 
-		productPage pp = new productPage(driver);
-
 		String loginMsg = pp.getToastMessage("Login Successfully");
 
 		Assert.assertEquals(loginMsg, "Login Successfully");
 
-		String products[] = { "ZARA COAT 3", "ADIDAS ORIGINAL" };
+		String products[] = { "ZARA COAT 3", "ADIDAS ORIGINAL", "IPHONE 13 PRO" };
 
 		pp.addToCart(products);
 
-		driver.quit();
+		pp.goToCart();
 
-	}
+		cp.isCartItemsPresent(products);
 
-	public static ChromeOptions browerOptions(String Mode) {
-		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
-		System.setProperty("webdriver.chrome.silentOutput", "true");
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("incognito").addArguments("--remote-allow-origins=*").addArguments("--log-level=3")
-				.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" })
-				.setPageLoadStrategy(PageLoadStrategy.NORMAL).addArguments("--" + Mode + "");
-		if (Mode.equalsIgnoreCase("headless")) {
-			options.addArguments("--window-size=1920,1080");
-		}
-		return options;
+		Assert.assertTrue(true);
+
+		cp.goToCheckout();
+
+		co.selectCountry("India");
+
+		co.placeOrder();
+
+		String thankmsg = cf.confirmMessage();
+
+		Assert.assertEquals(thankmsg, "THANKYOU FOR THE ORDER.");
+
+		String OrderToastMsg = pp.getToastMessage("Order Placed Successfully");
+
+		Assert.assertEquals(OrderToastMsg, "Order Placed Successfully");
+
 	}
 
 }

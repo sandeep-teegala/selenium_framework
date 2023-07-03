@@ -1,5 +1,6 @@
 package selenium_framework.pageobjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import selenium_framework.commonfunctions.CommonControls;
 
@@ -26,7 +28,7 @@ public class productPage extends CommonControls {
 	@FindBy(xpath = "//div[contains(@class,'ngx-spinner')]")
 	WebElement spinnerLoc;
 
-	@FindBy(xpath = "//div[@id='toast-container']/div[normalize-space()='Product Added To Cart']")
+	@FindBy(xpath = "//div[@id='toast-container']/div/div[normalize-space()='Product Added To Cart']")
 	WebElement productAddedToastLoc;
 
 	By addToCartLoc = By.xpath("//button[normalize-space()='Add To Cart']");
@@ -51,12 +53,13 @@ public class productPage extends CommonControls {
 		return getProduct;
 	}
 
-	public void addToCart(String[] products) {
+	public void addToCart(String[] products) throws InterruptedException {
 		for (String pro : products) {
 			WebElement product = getProduct(pro);
 			product.findElement(addToCart).click();
-			waitForSpinnerInvisible();
-			waitForInvisibleElement(productAddedToastLoc, 5);
+			// waitForSpinnerInvisible();
+			Thread.sleep(Duration.ofSeconds(2));
+			waitForVisibleElement(productAddedToastLoc, 5);
 		}
 	}
 
