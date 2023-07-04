@@ -17,12 +17,21 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import selenium_framework.pageobjects.CartPage;
+import selenium_framework.pageobjects.CheckOutPage;
+import selenium_framework.pageobjects.ConfirmationPage;
 import selenium_framework.pageobjects.LoginPage;
+import selenium_framework.pageobjects.productPage;
 
 public class BaseTest {
 
 	public WebDriver driver;
 	public Properties prop;
+	public LoginPage la;
+	public productPage pp;
+	public CartPage cp;
+	public CheckOutPage co;
+	public ConfirmationPage cf;
 
 	public WebDriver initializeDriver() throws IOException {
 
@@ -80,12 +89,15 @@ public class BaseTest {
 	}
 
 	@BeforeMethod
-	public LoginPage launchApplication() throws IOException {
+	public void launchApplication() throws IOException {
 		driver = initializeDriver();
-		LoginPage la = new LoginPage(driver);
+		la = new LoginPage(driver);
+		pp = new productPage(driver);
+		cp = new CartPage(driver);
+		co = new CheckOutPage(driver);
+		cf = new ConfirmationPage(driver);
 		String url = prop.getProperty("url");
-		la.lauchApplication(url);
-		return la;
+		la.goTo(url);
 	}
 
 	@AfterMethod

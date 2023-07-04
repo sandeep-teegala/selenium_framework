@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import selenium_framework.commonfunctions.CommonControls;
-import selenium_framework.commonfunctions.CommonUiFunctions;
 
 public class CartPage extends CommonControls {
 
@@ -24,7 +23,7 @@ public class CartPage extends CommonControls {
 	@FindBy(css = "div.cart")
 	List<WebElement> cartItems;
 
-	@FindBy(xpath = "//button[normalize-space()='Checkout']")
+	@FindBy(css = ".totalRow button")
 	WebElement checkoutButtonLoc;
 
 	public boolean isCartItemsPresent(String[] products) {
@@ -38,8 +37,14 @@ public class CartPage extends CommonControls {
 	}
 
 	public void goToCheckout() {
-		waitForVisibleElement(checkoutButtonLoc, 3);
-		scrollToElement(checkoutButtonLoc);
+		// Thread.sleep(Duration.ofSeconds(5));
+		// js.executeScript("arguments[0].scrollIntoView(true);", checkoutButtonLoc);
+		// js.executeScript("window.scrollBy(0,2500)");
+		// waitForVisibleElement(checkoutButtonLoc, 3);
+		// scrollToElement(checkoutButtonLoc);
+//		Robot robot = new Robot();
+//		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+//		robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
 		checkoutButtonLoc.click();
 	}
 

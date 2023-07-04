@@ -1,6 +1,5 @@
 package selenium_framework.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +32,7 @@ public class LoginPage {
 	@FindBy(css = "input[value='Login']")
 	WebElement loginButton;
 
-	public void lauchApplication(String url) {
+	public void goTo(String url) {
 		driver.get(url);
 	}
 
