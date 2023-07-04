@@ -21,7 +21,9 @@ import selenium_framework.pageobjects.CartPage;
 import selenium_framework.pageobjects.CheckOutPage;
 import selenium_framework.pageobjects.ConfirmationPage;
 import selenium_framework.pageobjects.LoginPage;
+import selenium_framework.pageobjects.OrdersPage;
 import selenium_framework.pageobjects.productPage;
+import selenium_framework.utilities.FileUtilities;
 
 public class BaseTest {
 
@@ -32,6 +34,8 @@ public class BaseTest {
 	public CartPage cp;
 	public CheckOutPage co;
 	public ConfirmationPage cf;
+	public OrdersPage op;
+	public FileUtilities fu;
 
 	public WebDriver initializeDriver() throws IOException {
 
@@ -88,7 +92,7 @@ public class BaseTest {
 
 	}
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void launchApplication() throws IOException {
 		driver = initializeDriver();
 		la = new LoginPage(driver);
@@ -96,11 +100,13 @@ public class BaseTest {
 		cp = new CartPage(driver);
 		co = new CheckOutPage(driver);
 		cf = new ConfirmationPage(driver);
+		op = new OrdersPage(driver);
+		fu = new FileUtilities(driver);
 		String url = prop.getProperty("url");
 		la.goTo(url);
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		driver.quit();
 	}

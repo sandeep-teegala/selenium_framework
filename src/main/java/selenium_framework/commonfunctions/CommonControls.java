@@ -25,8 +25,15 @@ public class CommonControls {
 	@FindBy(xpath = "//nav//button[contains(text(),'Cart')]")
 	WebElement cartButtonLoc;
 
+	@FindBy(xpath = "//nav//button[contains(text(),'ORDERS')]")
+	WebElement ordersButtonLoc;
+
 	public void goToCart() {
 		cartButtonLoc.click();
+	}
+
+	public void goToOrders() {
+		ordersButtonLoc.click();
 	}
 
 	public void waitForVisibleElement(WebElement element, int sec) {

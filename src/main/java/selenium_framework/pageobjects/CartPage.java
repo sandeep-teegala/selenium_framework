@@ -1,10 +1,14 @@
 package selenium_framework.pageobjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -36,7 +40,7 @@ public class CartPage extends CommonControls {
 		return isItem;
 	}
 
-	public void goToCheckout() {
+	public void goToCheckout() throws InterruptedException {
 		// Thread.sleep(Duration.ofSeconds(5));
 		// js.executeScript("arguments[0].scrollIntoView(true);", checkoutButtonLoc);
 		// js.executeScript("window.scrollBy(0,2500)");
@@ -45,6 +49,17 @@ public class CartPage extends CommonControls {
 //		Robot robot = new Robot();
 //		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
 //		robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+//
+//		driver.findElement(By.tagName("body")).sendKeys(Keys.PAGE_DOWN);
+//
+//		Actions a = new Actions(driver);
+//		a.moveToElement(checkoutButtonLoc).build().perform();
+//
+//		Thread.sleep(Duration.ofSeconds(5));
+
 		checkoutButtonLoc.click();
 	}
 
