@@ -8,6 +8,10 @@
 		</run>
 	</groups>
 
+	<listeners>
+		<listener class-name="selenium_framework.testcomponents.Listeners"></listener>
+	</listeners>
+
 	<test thread-count="5" name="Submit Order Tests">
 		<classes>
 			<class name="selenium_framework.tests.SubmitOrderTest" />
