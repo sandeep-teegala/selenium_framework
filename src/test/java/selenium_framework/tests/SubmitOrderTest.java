@@ -17,10 +17,10 @@ public class SubmitOrderTest extends BaseTest {
 		la.loginApplication("test557@gmail.com", "Test_557");
 		String loginMsg = pp.getToastMessage("Login Successfully");
 		Assert.assertEquals(loginMsg, "Login Successfully");
-		String products[] = { "ZARA COAT 3", "ADIDAS ORIGINAL" };
+		String products[] = { "ZARA COAT 3" };
 		pp.addToCart(products);
 		pp.goToCart();
-		//Assert.assertTrue(cp.isCartItemsPresent(products));
+		Assert.assertTrue(cp.isCartItemsPresent(products));
 		cp.goToCheckout();
 		co.selectCountry("India");
 		co.placeOrder();
@@ -58,7 +58,7 @@ public class SubmitOrderTest extends BaseTest {
 
 	@Test(dependsOnMethods = "submitOrder")
 	public void verifyOrder() throws IOException, InterruptedException {
-		la.loginApplication("test557@gmail.com", "Test_557");
+		la.loginApplication("test558@gmail.com", "Test_558");
 		pp.goToOrders();
 		String products[] = { "ADIDAS ORIGINAL" };
 		Assert.assertTrue(op.isOrderPresent(products));

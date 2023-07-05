@@ -36,7 +36,15 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://github.com/allure-framework/allure2/releases This is the
+		<!-- To handle String to hashMap using Jackson Databind dependency-->
+		<!--https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
+		</dependency>
+
+		<!-- *https://github.com/allure-framework/allure2/releases* This is the
 		url to download allure software-->
 		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
 		<dependency>
@@ -45,13 +53,15 @@
 			<version>2.23.0</version>
 		</dependency>
 
-		<!--https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.15.2</version>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.0.9</version>
 		</dependency>
 
+		<!-- To avoid console warnings I am using these dependencies see when
+		ran without testng-->
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -59,6 +69,8 @@
 			<version>2.0.7</version>
 		</dependency>
 
+		<!-- To avoid console warnings I am using these dependencies see when
+		ran without testng-->
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

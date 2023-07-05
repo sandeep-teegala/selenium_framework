@@ -13,7 +13,7 @@ public class ErrorValidationTest extends BaseTest {
 	public void loginError() {
 		la.loginApplication("test557@gmail.com", "Test_777");
 		String loginMsg = pp.getToastMessage("Incorrect email or password.");
-		Assert.assertEquals(loginMsg, "Incorrect email or password.");
+		Assert.assertEquals(loginMsg, "Incorrect email or password!");
 	}
 
 	@Test

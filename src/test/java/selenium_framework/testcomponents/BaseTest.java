@@ -1,12 +1,16 @@
 package selenium_framework.testcomponents;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -92,6 +96,14 @@ public class BaseTest {
 
 	}
 
+	public String getScreenShot(String testName, WebDriver driver) throws IOException {
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		File file = new File(System.getProperty("user.dir") + "\\output\\screenshots" + testName + ".png");
+		FileUtils.copyFile(source, file);
+		return System.getProperty("user.dir") + "\\output\\screenshots" + testName + ".png";
+	}
+
 	@BeforeMethod(alwaysRun = true)
 	public void launchApplication() throws IOException {
 		driver = initializeDriver();
@@ -101,7 +113,7 @@ public class BaseTest {
 		co = new CheckOutPage(driver);
 		cf = new ConfirmationPage(driver);
 		op = new OrdersPage(driver);
-		fu = new FileUtilities(driver);
+		fu = new FileUtilities();
 		String url = prop.getProperty("url");
 		la.goTo(url);
 	}
