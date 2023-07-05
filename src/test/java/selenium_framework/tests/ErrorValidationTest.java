@@ -6,10 +6,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import selenium_framework.testcomponents.BaseTest;
+import selenium_framework.testcomponents.Retry;
 
 public class ErrorValidationTest extends BaseTest {
 
-	@Test(groups = "ErrorHandling")
+	@Test(groups = { "ErrorHandling" }, retryAnalyzer = Retry.class)
 	public void loginError() {
 		la.loginApplication("test557@gmail.com", "Test_777");
 		String loginMsg = pp.getToastMessage("Incorrect email or password.");
