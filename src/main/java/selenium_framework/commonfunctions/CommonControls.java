@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,8 @@ public class CommonControls {
 
 	WebDriver driver;
 	WebDriverWait wait;
+	Actions action;
+	JavascriptExecutor js;
 
 	public CommonControls(WebDriver driver) {
 		this.driver = driver;
@@ -67,13 +70,53 @@ public class CommonControls {
 	}
 
 	public void actionSendKeys(WebElement element, String value) {
-		Actions action = new Actions(driver);
+		action = new Actions(driver);
 		action.sendKeys(element, value).build().perform();
 	}
 
-	public void scrollToElement(WebElement element) {
-		Actions action = new Actions(driver);
-		action.scrollToElement(element);
+	public void actionScrollToElement(WebElement element) {
+		action = new Actions(driver);
+		action.scrollToElement(element).build().perform();
+	}
+
+	public void pageScrollToUp() {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(document.body.scrollHeight,0);");
+	}
+
+	public void pageScrollToDown() {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
+	}
+
+	public void pageScrollByVerticalIndex(int index) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0," + index + ")");
+	}
+
+	public void pageScrollByHorizontalIndex(int index) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(" + index + ",0)");
+	}
+
+	public void elementScrollToUp(WebElement element) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(" + element + ").scrollTo(document.body.scrollHeight, 0);");
+	}
+
+	public void elementScrollToDown(WebElement element) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(" + element + ").scrollTo(0, document.body.scrollHeight);");
+	}
+
+	public void elementScrollByVerticalIndex(WebElement element, int index) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(" + element + ").scrollBy(0," + index + ");");
+	}
+
+	public void elementScrollByHorizontalIndex(WebElement element, int index) {
+		js = (JavascriptExecutor) driver;
+		js.executeScript("document.querySelector(" + element + ").scrollBy(" + index + ",0);");
 	}
 
 }

@@ -28,6 +28,7 @@ public class CheckOutPage extends CommonControls {
 	WebElement placeOrderLoc;
 
 	public void selectCountry(String value) {
+		waitForVisibleElement(selectCountryDD, 5);
 		actionSendKeys(selectCountryDD, value);
 		waitForVisibleElement(countryDDList, 2);
 		driver.findElement(

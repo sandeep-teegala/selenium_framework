@@ -33,8 +33,7 @@ public class SubmitOrderTest extends BaseTest {
 	@DataProvider
 	public Object[][] getData() {
 		return new Object[][] { { "test557@gmail.com", "Test_557", "ZARA COAT 3" },
-				// { "test558@gmail.com", "Test_558", "ADIDAS ORIGINAL" }
-		};
+				{ "test558@gmail.com", "Test_558", "ADIDAS ORIGINAL" } };
 	}
 
 	// This test using test data with direct muti dimensiosns array in getData we
@@ -44,10 +43,10 @@ public class SubmitOrderTest extends BaseTest {
 		la.loginApplication(email, password);
 		String loginMsg = pp.getToastMessage("Login Successfully");
 		Assert.assertEquals(loginMsg, "Login Successfully");
-		String products[] = { "ZARA COAT 3", "ADIDAS ORIGINAL" };
+		String products[] = { product };
 		pp.addToCart(products);
 		pp.goToCart();
-		// Assert.assertTrue(cp.isCartItemsPresent(products));
+		Assert.assertTrue(cp.isCartItemsPresent(products));
 		cp.goToCheckout();
 		co.selectCountry("India");
 		co.placeOrder();

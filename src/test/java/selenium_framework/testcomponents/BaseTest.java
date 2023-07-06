@@ -8,7 +8,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
@@ -63,7 +62,7 @@ public class BaseTest {
 			options.addArguments("incognito").addArguments("--remote-allow-origins=*").addArguments("--log-level=3")
 					.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" })
 					.setPageLoadStrategy(PageLoadStrategy.NORMAL).setAcceptInsecureCerts(true)
-					.addArguments("--" + browserMode + "");
+					.addArguments("--disable-gpu").addArguments("--" + browserMode + "");
 			if (browserMode.equalsIgnoreCase("headless")) {
 				options.addArguments("--window-size=1920,1080");
 			}
@@ -93,11 +92,12 @@ public class BaseTest {
 		}
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.manage().window().setSize(new Dimension(1920, 1080));
-		// driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+		// driver.manage().window().setSize(new Dimension(1440, 900));
+		// driver.manage().window().setSize(new Dimension(1920,1080));
+		driver.manage().window().maximize();
 
 		return driver;
-
 	}
 
 	public String getScreenShot(String testName, WebDriver driver) throws IOException {

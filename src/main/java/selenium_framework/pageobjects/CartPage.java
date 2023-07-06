@@ -1,5 +1,6 @@
 package selenium_framework.pageobjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -20,7 +21,7 @@ public class CartPage extends CommonControls {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css = "div.cart")
+	@FindBy(css = "li[class*='items']")
 	List<WebElement> cartItems;
 
 	@FindBy(css = ".totalRow button")
@@ -37,26 +38,13 @@ public class CartPage extends CommonControls {
 	}
 
 	public void goToCheckout() throws InterruptedException {
-		// Thread.sleep(Duration.ofSeconds(5));
-		// js.executeScript("arguments[0].scrollIntoView(true);", checkoutButtonLoc);
-		// js.executeScript("window.scrollBy(0,2500)");
-		// waitForVisibleElement(checkoutButtonLoc, 3);
-		// scrollToElement(checkoutButtonLoc);
-//		Robot robot = new Robot();
-//		robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-//		robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
-
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollTo(0,document.body.scrollHeight);");
-//
-//		driver.findElement(By.tagName("body")).sendKeys(Keys.PAGE_DOWN);
-//
-//		Actions a = new Actions(driver);
-//		a.moveToElement(checkoutButtonLoc).build().perform();
-//
-//		Thread.sleep(Duration.ofSeconds(5));
-
+		Thread.sleep(Duration.ofSeconds(2));
+		pageScrollToDown();
+		waitForVisibleElement(checkoutButtonLoc, 5);
 		checkoutButtonLoc.click();
+		Thread.sleep(Duration.ofSeconds(2));
+		pageScrollToUp();
+		Thread.sleep(Duration.ofSeconds(2));
 	}
 
 }
