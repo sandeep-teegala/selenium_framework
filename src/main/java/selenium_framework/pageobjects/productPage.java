@@ -57,7 +57,7 @@ public class productPage extends CommonControls {
 			WebElement product = getProduct(pro);
 			product.findElement(addToCart).click();
 			// waitForSpinnerInvisible();
-			Thread.sleep(Duration.ofSeconds(2));
+			Thread.sleep(2000);
 			waitForVisibleElement(productAddedToastLoc, 5);
 		}
 	}

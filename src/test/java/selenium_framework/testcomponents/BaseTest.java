@@ -51,8 +51,7 @@ public class BaseTest {
 
 		String browserName = System.getProperty("browser") != null ? System.getProperty("browser")
 				: prop.getProperty("browser");
-		String browserMode = System.getProperty("browser") != null ? System.getProperty("browser")
-				: prop.getProperty("mode");
+		String browserMode = System.getProperty("mode") != null ? System.getProperty("mode") : prop.getProperty("mode");
 
 		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 		System.setProperty("webdriver.chrome.silentOutput", "true");

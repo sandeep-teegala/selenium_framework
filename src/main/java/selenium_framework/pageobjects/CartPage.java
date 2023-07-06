@@ -38,13 +38,13 @@ public class CartPage extends CommonControls {
 	}
 
 	public void goToCheckout() throws InterruptedException {
-		Thread.sleep(Duration.ofSeconds(2));
+		Thread.sleep(4000);
 		pageScrollToDown();
 		waitForVisibleElement(checkoutButtonLoc, 5);
 		checkoutButtonLoc.click();
-		Thread.sleep(Duration.ofSeconds(2));
+		Thread.sleep(2000);
 		pageScrollToUp();
-		Thread.sleep(Duration.ofSeconds(2));
+		Thread.sleep(2000);
 	}
 
 }
