@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TakesScreenshot;
@@ -48,8 +49,11 @@ public class BaseTest {
 		FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
 				+ "//src//main//java//selenium_framework//resources//GlobalData.properties");
 		prop.load(fis);
-		String browserName = prop.getProperty("browser");
-		String browserMode = prop.getProperty("mode");
+
+		String browserName = System.getProperty("browser") != null ? System.getProperty("browser")
+				: prop.getProperty("browser");
+		String browserMode = System.getProperty("browser") != null ? System.getProperty("browser")
+				: prop.getProperty("mode");
 
 		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 		System.setProperty("webdriver.chrome.silentOutput", "true");
@@ -79,6 +83,7 @@ public class BaseTest {
 		else if (browserName.equalsIgnoreCase("Edge")) {
 			EdgeOptions Options = new EdgeOptions();
 			Options.addArguments("InPrivate").addArguments("--remote-allow-origins=*").addArguments("--log-level=3")
+					.setExperimentalOption("excludeSwitches", new String[] { "enable-automation" })
 					.setPageLoadStrategy(PageLoadStrategy.NORMAL).setAcceptInsecureCerts(true)
 					.addArguments("--" + browserMode + "");
 			if (browserMode.equalsIgnoreCase("headless")) {
@@ -88,9 +93,8 @@ public class BaseTest {
 		}
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		if (browserMode.equalsIgnoreCase("headed")) {
-			driver.manage().window().maximize();
-		}
+		driver.manage().window().setSize(new Dimension(1920, 1080));
+		// driver.manage().window().maximize();
 
 		return driver;
 
