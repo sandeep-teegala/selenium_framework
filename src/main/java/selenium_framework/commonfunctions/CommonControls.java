@@ -31,8 +31,9 @@ public class CommonControls {
 	@FindBy(xpath = "//nav//button[contains(text(),'ORDERS')]")
 	WebElement ordersButtonLoc;
 
-	public void goToCart() {
+	public void goToCart() throws InterruptedException {
 		cartButtonLoc.click();
+		Thread.sleep(2000);
 	}
 
 	public void goToOrders() {
