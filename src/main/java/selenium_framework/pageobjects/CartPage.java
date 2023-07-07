@@ -38,7 +38,7 @@ public class CartPage extends CommonControls {
 	}
 
 	public void goToCheckout() throws InterruptedException {
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		pageScrollToDown();
 		waitForVisibleElement(checkoutButtonLoc, 5);
 		checkoutButtonLoc.click();
