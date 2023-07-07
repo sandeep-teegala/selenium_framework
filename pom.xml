@@ -211,8 +211,6 @@
 						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
-
-
 				<!-- default lifecycle, jar packaging: see
 				https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
 				<plugin>
