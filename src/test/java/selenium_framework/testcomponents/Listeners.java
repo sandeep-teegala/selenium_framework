@@ -1,5 +1,6 @@
 package selenium_framework.testcomponents;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
+import io.qameta.allure.Allure;
 import selenium_framework.utilities.FileUtilities;
 
 public class Listeners extends BaseTest implements ITestListener {
@@ -42,7 +44,10 @@ public class Listeners extends BaseTest implements ITestListener {
 	public void onTestFailure(ITestResult result) {
 		// TODO Auto-generated method stub
 		ITestListener.super.onTestFailure(result);
+
 		safeReport.get().fail(result.getThrowable());
+
+		Allure.addAttachment("My attachment", "My attachment content");
 
 		try {
 			driver = (WebDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
@@ -58,9 +63,15 @@ public class Listeners extends BaseTest implements ITestListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		safeReport.get().addScreenCaptureFromPath(filePath, result.getMethod().getMethodName());
 
-		// ScreenShot , Attact to the report.
+		try (FileInputStream fis = new FileInputStream(filePath)) {
+			Allure.addAttachment("My attachment", fis);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		safeReport.get().addScreenCaptureFromPath(filePath, result.getMethod().getMethodName());
 	}
 
 	@Override

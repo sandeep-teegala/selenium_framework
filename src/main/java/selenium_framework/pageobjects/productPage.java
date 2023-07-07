@@ -1,6 +1,5 @@
 package selenium_framework.pageobjects;
 
-import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;

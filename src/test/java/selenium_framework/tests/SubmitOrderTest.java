@@ -8,11 +8,16 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Step;
 import selenium_framework.testcomponents.BaseTest;
 
 public class SubmitOrderTest extends BaseTest {
 
 	@Test
+	@Severity(SeverityLevel.BLOCKER)
+	@Step("")
 	public void placeOrder() throws IOException, InterruptedException {
 		la.loginApplication("test557@gmail.com", "Test_557");
 		String loginMsg = pp.getToastMessage("Login Successfully");
